@@ -1,7 +1,8 @@
 // src/App.js
 
 import React from 'react';
-import Header from './components/Header';
+import SearchBar from './components/SearchBar'
+//import { Background } from './components/Background';
 
 
 
@@ -10,8 +11,7 @@ function App() {
 
   return (
     <div>
-      <Header />
-      {/* Other content of your website */}
+      <SearchBar/>
     </div>
   );
 }

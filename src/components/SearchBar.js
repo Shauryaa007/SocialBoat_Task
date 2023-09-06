@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Header from './Header'
+import { Card } from './Card';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -10,6 +12,10 @@ const SearchBar = () => {
     flexGrow: 1,
     margin: '0 10px',
     padding: '5px',
+    border:'5px solid black',
+    borderRadius:'50px',
+    height:'50px',
+    width:'500px',
   };
 
   // Call fetchData when searchQuery changes
@@ -46,38 +52,49 @@ const SearchBar = () => {
     }
   }, [searchQuery]);
 
+  //console.log("results",results.results[0].heading);
+
   return (
-    <div>
-      <input
+    <div >
+      <Header/>
+
+      <div style={{margin:'5px 5px 5px 5px'}}>
+     <center>
+      <h1>Search For Exercises</h1>
+     <input
         style={searchStyles}
         type="text"
         placeholder="Search for videos..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+      
 
-      <h2>Search Results:</h2>
+      <h1 style={{color:'white'}}>Search Results:</h1>
       {loading ? (
-        <p>Loading...</p>
+        <p style={{color:'white'}}>Loading...</p>
       ) : error ? (
         <p>Error: {error}</p>
       ) : Array.isArray(results.results) && results.results.length > 0 ? (
         <ul>
-          {results.results.map((video, index) => (
+          {results.results.map((index) => (
+
             // <li key={index}>{video.video}</li>
-            <video width="320" height="240" controls>
-            <source src={video.video} type="video/mp4"/>
-          </video>
+          //   <video width="320" height="240" controls>
+          //   <source src={video.video} type="video/mp4"/>
+          // </video>
+
+          <Card heading={index.heading} videoUrl={index.video} tags={index.tags} />
+         // heading={results.results.heading} videoUrl={video.video} tags={results.results.tags}
 
 
           ))}
         </ul>
       ) : (
-        <p>No results found.</p>
-      )}
-
-
-      {/* <h3>First heading is: {results.results[0].heading}</h3> */}
+        <p style={{color:'white'}}>No results found.</p>
+      )}</center> 
+      </div>
+      
 
     </div>
   );
